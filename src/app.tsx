@@ -42,13 +42,8 @@ export const layout = ({
 }: {
   initialState: { settings?: LayoutSettings; currentUser?: API.CurrentUser };
 }): BasicLayoutProps => {
-  // add:使用lodash 判断路由是否空
-  let routes = {routes:[]};
-  if(initialState?.currentUser&&initialState?.currentUser.menudata){
-    routes = initialState?.currentUser.menudata
-  }
   return {
-    menuDataRender:()=>routes,
+    menuDataRender:()=>(initialState?.currentUser&&initialState?.currentUser.menudata)?(initialState?.currentUser.menudata):{routes:[]},
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     footerRender: () => <Footer />,
