@@ -7,6 +7,29 @@ import Footer from '@/components/Footer';
 import { ResponseError } from 'umi-request';
 import { queryCurrent } from './services/user';
 import defaultSettings from '../config/defaultSettings';
+import { getPageQuery } from '@/utils/utils';
+
+/**
+ * 此方法会跳转到 redirect 参数所在的位置
+ */
+const replaceGoto = () => {
+  const urlParams = new URL(window.location.href);
+  const params = getPageQuery();
+  let { redirect } = params as { redirect: string };
+  if (redirect) {
+    const redirectUrlParams = new URL(redirect);
+    if (redirectUrlParams.origin === urlParams.origin) {
+      redirect = redirect.substr(urlParams.origin.length);
+      if (redirect.match(/^\/.*#/)) {
+        redirect = redirect.substr(redirect.indexOf('#') + 1);
+      }
+    } else {
+      window.location.href = '/';
+      return;
+    }
+  }
+  window.location.href = urlParams.href.split(urlParams.pathname)[0] + (redirect || '/');
+};
 
 export async function getInitialState(): Promise<{
   settings?: LayoutSettings;
@@ -30,7 +53,10 @@ export async function getInitialState(): Promise<{
       currentUser,
       settings: defaultSettings,
     };
+  }else {
+      replaceGoto(); // 此方法会跳转到 redirect 参数所在的位置
   }
+
   return {
     fetchUserInfo,
     settings: defaultSettings,
