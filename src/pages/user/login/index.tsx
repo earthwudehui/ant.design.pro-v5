@@ -1,6 +1,6 @@
 import { Alert, message } from 'antd';
 import React, { useState } from 'react';
-import { Link, useModel, history, History } from 'umi';
+import { Link, SelectLang, useModel, history, History } from 'umi';
 import logo from '@/assets/logo.svg';
 import { LoginParamsType, fakeAccountLogin } from '@/services/login';
 import Footer from '@/components/Footer';
@@ -70,6 +70,9 @@ const Login: React.FC<{}> = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.lang}>
+        <SelectLang />
+      </div>
       <div className={styles.content}>
         <div className={styles.top}>
           <div className={styles.header}>
