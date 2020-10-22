@@ -1,6 +1,6 @@
 import { Alert, message } from 'antd';
 import React, { useState } from 'react';
-import { Link, SelectLang, useModel, history, History } from 'umi';
+import { Link, useModel, history, History } from 'umi';
 import logo from '@/assets/logo.svg';
 import { LoginParamsType, fakeAccountLogin } from '@/services/login';
 import Footer from '@/components/Footer';
@@ -49,7 +49,7 @@ const Login: React.FC<{}> = () => {
       const msg = await fakeAccountLogin({ ...values, type });
       if (msg.status === 'ok' && initialState) {
         message.success('登录成功！');
-        localStorage.setItem('antd-pro-authority-token', JSON.stringify(msg.token));// 保存token-userid
+        localStorage.setItem('antd-pro-authority-token', JSON.stringify(msg.token)); // 保存token-userid
         const currentUser = await initialState?.fetchUserInfo();
         setInitialState({
           ...initialState,
@@ -66,13 +66,10 @@ const Login: React.FC<{}> = () => {
     setSubmitting(false);
   };
 
-  const { status, type: loginType , errMsg } = userLoginState;
+  const { status, type: loginType, errMsg } = userLoginState;
 
   return (
     <div className={styles.container}>
-      <div className={styles.lang}>
-        <SelectLang />
-      </div>
       <div className={styles.content}>
         <div className={styles.top}>
           <div className={styles.header}>
@@ -88,7 +85,7 @@ const Login: React.FC<{}> = () => {
           <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
             <Tab key="account" tab="账户密码登录">
               {status === 'error' && loginType === 'account' && !submitting && (
-                <LoginMessage content= {errMsg} />
+                <LoginMessage content={errMsg} />
               )}
 
               <Username
