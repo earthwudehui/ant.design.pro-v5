@@ -66,10 +66,30 @@ export default defineConfig({
       redirect: '/welcome',
     },
     {
-      name: '查询表格',
-      icon: 'smile',
-      path: '/listtablelist',
-      component: './ListTableList',
+      path: '/resmanage',
+      name: '资源管理',
+      icon: 'crown',
+      access: 'canAdmin',
+      routes: [
+        {
+          path: '/resmanage/usermanage',
+          name: '用户管理',
+          icon: 'smile',
+          component: './resmanage/usermanage',
+        },
+        {
+          path: '/resmanage/rolemanage',
+          name: '角色管理',
+          icon: 'smile',
+          component: './Welcome',
+        },
+        {
+          path: '/resmanage/resmanage',
+          name: '菜单管理',
+          icon: 'smile',
+          component: './ListTableList',
+        },
+      ],
     },
     {
       component: './404',
