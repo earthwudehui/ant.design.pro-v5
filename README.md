@@ -55,3 +55,10 @@ npm test
 ## More
 
 You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+
+## umi
+
+在项目中执行
+
+$ yarn add @umijs/preset-ui -D
+$ UMI_UI=1 umi dev
