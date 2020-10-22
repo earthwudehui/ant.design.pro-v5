@@ -5,9 +5,9 @@ import { history, RequestConfig } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { ResponseError } from 'umi-request';
+import { getPageQuery } from '@/utils/utils';
 import { queryCurrent } from './services/user';
 import defaultSettings from '../config/defaultSettings';
-import { getPageQuery } from '@/utils/utils';
 
 /**
  * 此方法会跳转到 redirect 参数所在的位置
@@ -38,7 +38,9 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const currentUser = await queryCurrent(localStorage.getItem("antd-pro-authority-token")||'');
+      const currentUser = await queryCurrent(
+        localStorage.getItem('antd-pro-authority-token') || '',
+      );
       return currentUser;
     } catch (error) {
       history.push('/user/login');
@@ -53,10 +55,8 @@ export async function getInitialState(): Promise<{
       currentUser,
       settings: defaultSettings,
     };
-  }else {
-      replaceGoto(); // 此方法会跳转到 redirect 参数所在的位置
   }
-
+  replaceGoto(); // 此方法会跳转到 redirect 参数所在的位置
   return {
     fetchUserInfo,
     settings: defaultSettings,
@@ -69,7 +69,10 @@ export const layout = ({
   initialState: { settings?: LayoutSettings; currentUser?: API.CurrentUser };
 }): BasicLayoutProps => {
   return {
-    menuDataRender:()=>(initialState?.currentUser&&initialState?.currentUser.menudata)?(initialState?.currentUser.menudata):{routes:[]},
+    menuDataRender: () =>
+      initialState?.currentUser && initialState?.currentUser.menudata
+        ? initialState?.currentUser.menudata
+        : { routes: [] },
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     footerRender: () => <Footer />,
