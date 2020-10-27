@@ -1,23 +1,20 @@
 export interface TableListItem {
-  key: number;
-  disabled?: boolean;
-  href: string;
-  avatar: string;
+  id: number;
   name: string;
-  owner: string;
-  desc: string;
-  callNo: number;
-  status: string;
-  updatedAt: Date;
-  createdAt: Date;
-  progress: number;
+  password: string;
+  realName: string;
+  mobile: string;
 }
 
 export interface TableListParams {
-  status?: string;
+  id?: number;
   name?: string;
-  desc?: string;
-  key?: number;
+  password?: string;
+  realName?: string;
+  mobile?: string;
+  status?: string;
+  loginDate?: Date;
+
   pageSize?: number;
   currentPage?: number;
   filter?: { [key: string]: any[] };

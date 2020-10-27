@@ -9,19 +9,19 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  return request<API.LoginStateType>('/api/login/account', {
+  return request<API.LoginStateType>('/api/frameadmin/account', {
     method: 'POST',
     data: params,
   });
 }
 
 export async function getFakeCaptcha(mobile: string) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
+  return request(`/api/frameadmin/captcha?mobile=${mobile}`);
 }
 
-export async function outLogin(userid:string) {
-  return request<API.HttpRule>('/api/login/outLogin',{
-    method:'POST',
-    data:{userid}
+export async function outLogin(userid: string) {
+  return request<API.HttpRule>('/api/frameadmin/outLogin', {
+    method: 'POST',
+    data: { userid },
   });
 }
